@@ -2,12 +2,17 @@ import { Scheduling } from "../scheduling";
 
 it('Should reject times before 08:00', () => {
     expect(() => new Scheduling('2025-07-03', '07:30', 30))
-        .toThrow('Appointment time must be beetwen 08:00 and 17:30');
+        .toThrow(new Error('Appointment time must be beetwen 08:00 and 18:00'));
 });
 
 it ('Should reject times after 17:30', () => {
-    expect(() => new Scheduling('2025-07-03', '17:45', 30))
-        .toThrow('Appointment time must be beetwen 08:00 and 17:30');
+    expect(() => new Scheduling('2025-07-03', '18:10', 30))
+        .toThrow(new Error('Appointment time must be beetwen 08:00 and 18:00'));
+});
+
+it ('Should reject it when the duration plus the time exceeds 18:00', () => {
+    expect(() => new Scheduling('2025-07-04', '17:45', 30))
+        .toThrow(new Error('Appointment exceeds closing time (18:00)'));
 });
 
 it ('Should must make an Appointment', () => {
