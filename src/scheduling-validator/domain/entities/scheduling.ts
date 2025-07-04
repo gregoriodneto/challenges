@@ -5,7 +5,8 @@ export class Scheduling {
     constructor(
         readonly day: string,
         readonly hour: string,
-        readonly durationMin: number
+        readonly durationMin: number,
+        readonly id?: string
     ) { 
         const start = DateAndTimeConverterUtil.toDate(hour);
         const min = DateAndTimeConverterUtil.toDate('08:00');
