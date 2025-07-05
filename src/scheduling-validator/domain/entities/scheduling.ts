@@ -8,6 +8,13 @@ export class Scheduling {
         readonly durationMin: number,
         readonly id?: string
     ) { 
+        if (!day)
+            throw new BadRequestException('Day field must be filled in');
+        if (!hour)
+            throw new BadRequestException('Hour field must be filled in');
+        if (durationMin <= 0)
+            throw new BadRequestException('Duration Minute field must be filled in');
+        
         const start = DateAndTimeConverterUtil.toDate(hour);
         const min = DateAndTimeConverterUtil.toDate('08:00');
         const max = DateAndTimeConverterUtil.toDate('18:00');
