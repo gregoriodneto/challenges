@@ -1,8 +1,8 @@
 import { Scheduling } from "../../../../domain/entities/scheduling";
 import { SchedulingSchema } from "../entities/scheduling.schema";
 
-export class SchedulingMappers {
-    toEntity(dto: SchedulingSchema): Scheduling {
+export class MapperScheduling {
+    static toEntity(dto: SchedulingSchema): Scheduling {
         return new Scheduling(
             dto.day,
             dto.hour,
@@ -11,11 +11,11 @@ export class SchedulingMappers {
         );
     }
 
-    toPlain(entity: Scheduling): Record<string, any> {
-        return {
-            day: entity.day,
-            hour: entity.hour,
-            durationMin: entity.durationMin
-        };
+    static toPlain(entity: Scheduling): SchedulingSchema {
+        return new SchedulingSchema(
+            entity.day,
+            entity.hour,
+            entity.durationMin
+        );
     }
 }

@@ -1,15 +1,22 @@
 import { Scheduling } from "../../../../domain/entities/scheduling";
 import { ISchedulingRepository } from "../../../../domain/repositories/scheduling-repository.interface";
 import { SchedulingSchema } from "../entities/scheduling.schema";
+import { MapperScheduling } from "../mappers/scheduling.mappers";
 
 export class InMemorySchedulingRepository implements ISchedulingRepository {
-    database: SchedulingSchema[] = [];
+    database: SchedulingSchema[];
+
+    constructor() {
+        this.database = [];
+    }
     
-    save(scheduler: Scheduling): Promise<Scheduling> {
-        throw new Error("Method not implemented.");
+    async save(scheduler: Scheduling): Promise<Scheduling> {
+        const schedulerSchema = MapperScheduling.toPlain(scheduler);
+        this.database.push(schedulerSchema);
+        return MapperScheduling.toEntity(schedulerSchema);
     }
 
-    getAll(): Promise<Scheduling[]> {
-        throw new Error("Method not implemented.");
+    async getAll(): Promise<Scheduling[]> {
+        return this.database.map(MapperScheduling.toEntity);
     }
 }
