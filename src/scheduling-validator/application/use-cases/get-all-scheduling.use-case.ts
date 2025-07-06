@@ -6,6 +6,6 @@ export class GetAllSchedulingUseCase implements IGetAllScheduling {
     constructor(private readonly schedulingRepo: ISchedulingRepository) { }
 
     async execute(): Promise<Scheduling[]> {
-        throw new Error("Method not implemented.");
+        return await this.schedulingRepo.getAll();
     }
 }
