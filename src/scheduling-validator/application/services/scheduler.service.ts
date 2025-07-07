@@ -11,10 +11,10 @@ export class SchedulerService implements ISchedulerService {
     ) { }
 
     async create(dto: CreatedSchedulerDTO): Promise<Scheduling> {
-        throw new Error("Method not implemented.");
+        return await this.createSchedulerUC.execute(dto);
     }
 
-    async getAll(): Promise<Scheduling> {
-        throw new Error("Method not implemented.");
+    async getAll(): Promise<Scheduling[]> {
+        return await this.getAllSchedulersUC.execute();
     }
 }
